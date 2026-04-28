@@ -18,7 +18,7 @@ class PolynomeTest {
 	
 	@Test
 	void testPolynomeCoefficientsInvalides() {
-		assertThrows(NullPointerException.class,
+		assertThrows(IllegalArgumentException.class,
 					 () -> new Polynome((double[]) null),
 					 "Tableau de coefficients NULL accepté");
 		assertThrows(IllegalArgumentException.class,

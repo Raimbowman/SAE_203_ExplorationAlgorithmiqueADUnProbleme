@@ -11,6 +11,9 @@ package iut.info1.sae202;
  */
 public class Polynome {
 	
+	private final String ERREUR_COEFFICIENTS
+						 = "Tableau de coefficients invalide";
+	
 	/**
 	 * Polynôme du degré choisi sous la forme : 
 	 * Kx^n + Kx^n-1 + ... + Kx^0
@@ -21,12 +24,14 @@ public class Polynome {
 	 * @throws IllegalArgumentException si polynôme invalide
 	 */
 	public Polynome(double[] coefficients) {
-		if (coefficients.length == 0
-			|| coefficients == null
-			|| coefficients.length > 1 && coefficients[coefficients.length - 1] == 0) {
-			throw new IllegalArgumentException("Tableau de coefficients invalide");
+		if (isNotValide(coefficients)) {
+			throw new IllegalArgumentException(ERREUR_COEFFICIENTS);
 		}
-		//TODO vérifier la validité des coefficients
+		for (int indice = 0; indice < coefficients.length; indice++) {
+			if (!Double.isFinite(coefficients[indice])) {
+				throw new IllegalArgumentException(ERREUR_COEFFICIENTS);
+			}
+		}
 	}
 	
 	/**
@@ -42,6 +47,22 @@ public class Polynome {
 			        double coefficient) {
 		/*TODO vérifier la validité des racines, de leur ordre de multiplicité
 		  et du plus haut coefficient*/
+	}
+	
+	/**
+	 * Vérifie la validité du tableau de coefficients en vérifiant : 
+	 * - un tableau null
+	 * - un tableau vide
+	 * - un tableau contenant des 0 inutiles
+	 * @param coefficients les différents coefficients du polynôme, donnés
+	 * 		  dans l'ordre croissant du degré.
+	 * @return false si les valeurs du tableau sont valides, true sinon
+	 */
+	private static boolean isNotValide(double[] coefficients) {
+		return     coefficients == null
+				|| coefficients.length == 0
+				|| coefficients.length > 1
+				&& coefficients[coefficients.length - 1] == 0;
 	}
 	
 	/**
