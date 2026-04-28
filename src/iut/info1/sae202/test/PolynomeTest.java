@@ -17,24 +17,25 @@ class PolynomeTest {
 	}
 	
 	@Test
-	void testPolynomeCoefficientsNull() {
-		assertThrows(IllegalArgumentException.class,
+	void testPolynomeCoefficientsInvalides() {
+		assertThrows(NullPointerException.class,
 					 () -> new Polynome((double[]) null),
 					 "Tableau de coefficients NULL accepté");
-	}
-	
-	@Test
-	void testPolynomeCoefficientsVide() {
 		assertThrows(IllegalArgumentException.class,
-					 () -> new Polynome(new double[] {}),
-					 "Tableau de coefficients vide accepté");
-	}
-	
-	@Test
-	void testPolynomeCoefficientsEndingZero() {
+				 () -> new Polynome(new double[] {}),
+				 "Tableau de coefficients vide accepté");
 		assertThrows(IllegalArgumentException.class,
-					 () -> new Polynome(new double[] {-7, 4, 0, 0}),
-					 "Coefficients nuls de plus haut degré accepté");
+				 () -> new Polynome(new double[] {-7, 4, 0, 0}),
+				 "Coefficients nuls de plus haut degré accepté");
+		assertThrows(IllegalArgumentException.class,
+				 () -> new Polynome(new double[] {Double.NaN, 4, -7}),
+				 "Coefficient NaN accepté");
+		assertThrows(IllegalArgumentException.class,
+				 () -> new Polynome(new double[] {Double.POSITIVE_INFINITY}),
+				 "Coefficient +infini accepté");
+		assertThrows(IllegalArgumentException.class,
+				 () -> new Polynome(new double[] {Double.NEGATIVE_INFINITY}),
+				 "Coefficient -infini accepté");
 	}
 
 }

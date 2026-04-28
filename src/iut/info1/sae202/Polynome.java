@@ -21,7 +21,9 @@ public class Polynome {
 	 * @throws IllegalArgumentException si polynôme invalide
 	 */
 	public Polynome(double[] coefficients) {
-		if (coefficients.length == 0) {
+		if (coefficients.length == 0
+			|| coefficients == null
+			|| coefficients.length > 1 && coefficients[coefficients.length - 1] == 0) {
 			throw new IllegalArgumentException("Tableau de coefficients invalide");
 		}
 		//TODO vérifier la validité des coefficients
