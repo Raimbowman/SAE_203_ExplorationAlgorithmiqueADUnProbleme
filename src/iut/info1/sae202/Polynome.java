@@ -11,7 +11,7 @@ package iut.info1.sae202;
  */
 public class Polynome {
 	
-	private final String ERREUR_COEFFICIENTS
+	private final String MESSAGE_ERREUR_COEFFICIENTS
 						 = "Tableau de coefficients invalide";
 	
 	/**
@@ -25,11 +25,11 @@ public class Polynome {
 	 */
 	public Polynome(double[] coefficients) {
 		if (isNotValide(coefficients)) {
-			throw new IllegalArgumentException(ERREUR_COEFFICIENTS);
+			throw new IllegalArgumentException(MESSAGE_ERREUR_COEFFICIENTS);
 		}
 		for (int indice = 0; indice < coefficients.length; indice++) {
 			if (!Double.isFinite(coefficients[indice])) {
-				throw new IllegalArgumentException(ERREUR_COEFFICIENTS);
+				throw new IllegalArgumentException(MESSAGE_ERREUR_COEFFICIENTS);
 			}
 		}
 	}
