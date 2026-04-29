@@ -106,5 +106,21 @@ class PolynomeTest {
 		 	 	 	 () -> new Polynome(new double[] {1}, new int[] {1}, Double.NEGATIVE_INFINITY),
 		 	 	 	 "Coefficient -infini du plus haut monôme accepté");					//Coefficient du plus haut monôme -infini
 	}
+	
+	@Test
+	void testGetDegre() {
+		assertEquals(0, new Polynome(new double[] {5}).getDegre(),
+					 "Echec des coefficients sur un degré nul");			//Constructeur coefficients degré 0
+		assertEquals(1, new Polynome(new double[] {-2, 3}).getDegre(),
+					 "Echec des coefficients sur un degré 1");				//Constructeur coefficients degré 1
+		assertEquals(2, new Polynome(new double[] {1, 0, 1}).getDegre(),
+				 "Echec des coefficients sur un degré 2");					//Constructeur coefficients degré 2
+		assertEquals(2, new Polynome(new double[] {5, -3},
+									 new int[] {1, 1}, 4).getDegre(),
+				 "Echec des racines sur un degré 2");						//Constructeur racines degré 2
+		assertEquals(3, new Polynome(new double[] {-1, 4},
+									 new int[] {2, 1}, 8).getDegre(),
+				 "Echec des racines sur un degré 3");						//Constructeur racines degré 3
+	}
 
 }

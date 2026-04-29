@@ -15,8 +15,44 @@ public class Polynome {
 						 = "Tableau de coefficients invalide";
 	
 	private final String MESSAGE_ERREUR_RACINES
-						 = "Tableaux de racines, d'ordre de multiplicité"
+						 = "Tableaux de racines, d'ordre de multiplicité "
 						   + "ou de coefficient du plus haut monôme invalides";
+	
+	/**
+	 * différents coefficients du polynôme construit avec le constructeur
+	 * prenant en paramètres un tableau des coefficients
+	 */
+	private double[] coefficients;
+	
+	/**
+	 * racines réelles du polynome construit avec le constructeur
+	 * prenant en paramètres les racines, ordre de multiplicité
+	 * et plus haut coefficient
+	 */
+	private double[] racines;
+	
+	/**
+	 * ordre de multiplicité de chacune des racines du polynome construit
+	 * avec le constructeur prenant en paramètres les racines,
+	 * ordre de multiplicité et plus haut coefficient
+	 */
+	private int[] ordresMultiplicite;
+	
+	/**
+	 * coefficient du monôme de plus haut degré du polynome construit
+	 * avec le constructeur prenant en paramètres les racines,
+	 * ordre de multiplicité et plus haut coefficient
+	 */
+	private double plusHautCoefficient;
+	
+	/**
+	 * numero du constructeur utilisé pour construire le polynome :
+	 * 1 = constructeur prenant en paramètre les coefficients
+	 * 2 = constructeur prenant en paramètres les racines,
+	 * 	   leur ordre de multiplicité et le coefficient
+	 * 	   du monôme de plus haut degré
+	 */
+	private byte numeroConstructeur;
 	
 	/**
 	 * Polynôme du degré choisi sous la forme : 
@@ -27,40 +63,46 @@ public class Polynome {
 	 * 		  Exemple : le tableau [-2, 4, 3] donne le polynome 3x^2 + 4x - 2
 	 * @throws IllegalArgumentException si polynôme invalide
 	 */
-	public Polynome(double[] coefficients) {
-		if (coefficientsNotValide(coefficients)) {
+	public Polynome(double[] tabCoefficients) {
+		if (coefficientsNotValide(tabCoefficients)) {
 			throw new IllegalArgumentException(MESSAGE_ERREUR_COEFFICIENTS);
 		}
-		for (int indice = 0; indice < coefficients.length; indice++) {
-			if (!Double.isFinite(coefficients[indice])) {
+		for (int indice = 0; indice < tabCoefficients.length; indice++) {
+			if (!Double.isFinite(tabCoefficients[indice])) {
 				throw new IllegalArgumentException(MESSAGE_ERREUR_COEFFICIENTS);
 			}
 		}
+		
+		coefficients = tabCoefficients;
+		numeroConstructeur = 1;
 	}
 	
 	/**
 	 * Polynôme du degré choisi sous la forme : 
 	 * Kx^n + Kx^n-1 + ... + Kx^0
 	 * avec K un réel quelconque choisi par l'utilisateur
-	 * @param racines différentes racines (réelles) du polynôme
-	 * @param ordreMultiplicite ordre de multiplicité de chacune des racines
+	 * @param tabRacines différentes racines (réelles) du polynôme
+	 * @param tabOrdreMultiplicite ordre de multiplicité de chacune des racines
 	 * @param hautCoefficient coefficient du monôme de plus haut degré
 	 * @throws IllegalArgumentException si polynôme invalide
 	 */
-	public Polynome(double[] racines, int[] ordreMultiplicite,
+	public Polynome(double[] tabRacines, int[] tabOrdreMultiplicite,
 			        double hautCoefficient) {
-		if (racinesNotValide(racines, ordreMultiplicite, hautCoefficient)) {
+		if (racinesNotValide(tabRacines, tabOrdreMultiplicite, hautCoefficient)) {
 			throw new IllegalArgumentException(MESSAGE_ERREUR_RACINES);
 		}
-		for (int indice = 0; indice < racines.length; //les longueurs des 2 tableaux sont déjà vérifiées au dessus
+		for (int indice = 0; indice < tabRacines.length; //les longueurs des 2 tableaux sont déjà vérifiées au dessus
 			 indice++) {
-			if (   !Double.isFinite(racines[indice])
-				|| ordreMultiplicite[indice] <= 0) {
+			if (   !Double.isFinite(tabRacines[indice])
+				|| tabOrdreMultiplicite[indice] <= 0) {
 				throw new IllegalArgumentException(MESSAGE_ERREUR_RACINES);
 			}
 		}
-		/*TODO vérifier la validité des racines, de leur ordre de multiplicité
-		  et du plus haut coefficient*/
+		
+		racines = tabRacines;
+		ordresMultiplicite = tabOrdreMultiplicite;
+		plusHautCoefficient = hautCoefficient;
+		numeroConstructeur = 2;
 	}
 	
 	/**
@@ -79,12 +121,23 @@ public class Polynome {
 				&& coefficients[coefficients.length - 1] == 0;
 	}
 	
-	private static boolean racinesNotValide(double[] racines,
-											int[] ordreMultiplicite,
+	/**
+	 * Vérifie la validité des paramètres du second constructeur en vérifiant : 
+	 * - des tableau null
+	 * - un différence du nombre de valeurs dans les racines et les ordres de multiplicité
+	 * - un coefficient du monôme de plus haut degré nul
+	 * - un coefficient du monôme de plus haut degré NaN ou infini
+	 * @param tabRacines différentes racines (réelles) du polynôme
+	 * @param tabOrdreMultiplicite ordre de multiplicité de chacune des racines
+	 * @param hautCoefficient coefficient du monôme de plus haut degré
+	 * @return false si les valeurs des paramètres sont valides, true sinon
+	 */
+	private static boolean racinesNotValide(double[] tabRacines,
+											int[] tabOrdreMultiplicite,
 											double hautCoefficient) {
-		return 	   racines == null 
-				|| ordreMultiplicite == null
-				|| racines.length != ordreMultiplicite.length
+		return 	   tabRacines == null 
+				|| tabOrdreMultiplicite == null
+				|| tabRacines.length != tabOrdreMultiplicite.length
 				|| hautCoefficient == 0
 				|| !Double.isFinite(hautCoefficient);
 	}
@@ -93,7 +146,15 @@ public class Polynome {
 	 * @return degré du polynome (degré du monôme de plus haut degré)
 	 */
 	public double getDegre() {
-		return 0; //STUB
+		if (numeroConstructeur == 1) {
+			return coefficients.length - 1;
+		} else {
+			int degre = 0;
+			for (int ordre : ordresMultiplicite) {
+				degre += ordre;
+			}
+			return degre;
+		}
 	}
 	
 	/**
