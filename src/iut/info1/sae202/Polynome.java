@@ -14,6 +14,10 @@ public class Polynome {
 	private final String MESSAGE_ERREUR_COEFFICIENTS
 						 = "Tableau de coefficients invalide";
 	
+	private final String MESSAGE_ERREUR_RACINES
+						 = "Tableaux de racines, d'ordre de multiplicité"
+						   + "ou de coefficient du plus haut monôme invalides";
+	
 	/**
 	 * Polynôme du degré choisi sous la forme : 
 	 * Kx^n + Kx^n-1 + ... + Kx^0
@@ -24,7 +28,7 @@ public class Polynome {
 	 * @throws IllegalArgumentException si polynôme invalide
 	 */
 	public Polynome(double[] coefficients) {
-		if (isNotValide(coefficients)) {
+		if (coefficientsNotValide(coefficients)) {
 			throw new IllegalArgumentException(MESSAGE_ERREUR_COEFFICIENTS);
 		}
 		for (int indice = 0; indice < coefficients.length; indice++) {
@@ -40,11 +44,21 @@ public class Polynome {
 	 * avec K un réel quelconque choisi par l'utilisateur
 	 * @param racines différentes racines (réelles) du polynôme
 	 * @param ordreMultiplicite ordre de multiplicité de chacune des racines
-	 * @param coefficient coefficient du monôme de plus haut degré
+	 * @param hautCoefficient coefficient du monôme de plus haut degré
 	 * @throws IllegalArgumentException si polynôme invalide
 	 */
-	public Polynome(double[] racines, double[] ordreMultiplicite,
-			        double coefficient) {
+	public Polynome(double[] racines, int[] ordreMultiplicite,
+			        double hautCoefficient) {
+		if (racinesNotValide(racines, ordreMultiplicite, hautCoefficient)) {
+			throw new IllegalArgumentException(MESSAGE_ERREUR_RACINES);
+		}
+		for (int indice = 0; indice < racines.length; //les longueurs des 2 tableaux sont déjà vérifiées au dessus
+			 indice++) {
+			if (   !Double.isFinite(racines[indice])
+				|| ordreMultiplicite[indice] <= 0) {
+				throw new IllegalArgumentException(MESSAGE_ERREUR_RACINES);
+			}
+		}
 		/*TODO vérifier la validité des racines, de leur ordre de multiplicité
 		  et du plus haut coefficient*/
 	}
@@ -58,11 +72,21 @@ public class Polynome {
 	 * 		  dans l'ordre croissant du degré.
 	 * @return false si les valeurs du tableau sont valides, true sinon
 	 */
-	private static boolean isNotValide(double[] coefficients) {
+	private static boolean coefficientsNotValide(double[] coefficients) {
 		return     coefficients == null
 				|| coefficients.length == 0
 				|| coefficients.length > 1
 				&& coefficients[coefficients.length - 1] == 0;
+	}
+	
+	private static boolean racinesNotValide(double[] racines,
+											int[] ordreMultiplicite,
+											double hautCoefficient) {
+		return 	   racines == null 
+				|| ordreMultiplicite == null
+				|| racines.length != ordreMultiplicite.length
+				|| hautCoefficient == 0
+				|| !Double.isFinite(hautCoefficient);
 	}
 	
 	/**

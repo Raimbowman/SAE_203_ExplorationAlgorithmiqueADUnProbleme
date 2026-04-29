@@ -9,11 +9,11 @@ class PolynomeTest {
 
 	@Test
 	void testPolynomeCoefficientsValides() {
-		assertDoesNotThrow(() -> new Polynome(new double[] {-2, 4, 3}));
-		assertDoesNotThrow(() -> new Polynome(new double[] {5}));        //constante
-		assertDoesNotThrow(() -> new Polynome(new double[] {0, 0, 1}));  //x^2
-		assertDoesNotThrow(() -> new Polynome(new double[] {12.5, -7.345, 65.8}));
-		assertDoesNotThrow(() -> new Polynome(new double[] {0})); //cas particulier polynome nul
+		assertDoesNotThrow(() -> new Polynome(new double[] {-2, 4, 3})); 		   //polynome classique
+		assertDoesNotThrow(() -> new Polynome(new double[] {5}));        		   //constante
+		assertDoesNotThrow(() -> new Polynome(new double[] {0, 0, 1}));  		   //x^2
+		assertDoesNotThrow(() -> new Polynome(new double[] {12.5, -7.345, 65.8})); //valeurs décimales
+		assertDoesNotThrow(() -> new Polynome(new double[] {0})); 				   //cas particulier polynome nul
 	}
 	
 	@Test
@@ -36,6 +36,75 @@ class PolynomeTest {
 		assertThrows(IllegalArgumentException.class,
 				 () -> new Polynome(new double[] {Double.NEGATIVE_INFINITY}),
 				 "Coefficient -infini accepté");
+	}
+	
+	@Test
+	void testPolynomeRacinesValides() {
+		assertDoesNotThrow(() -> new Polynome(new double[] {3, -1},
+											  new int[] {1, 1}, 2));		//Polynome simple
+		assertDoesNotThrow(() -> new Polynome(new double[] {2},
+											  new int[] {2}, 1));			//Racine double
+		assertDoesNotThrow(() -> new Polynome(new double[] {-1, 0, 5},
+											  new int[] {1, 1, 1}, -3));	//Trois racines distinctes
+		assertDoesNotThrow(() -> new Polynome(new double[] {1},
+											  new int[] {3}, 1));			//Racine triple
+		assertDoesNotThrow(() -> new Polynome(new double[] {-2, 4},
+											  new int[] {2, 1}, 2));		//Multiplicités mixtes
+	}
+	
+	@Test
+	void testPolynomeRacinesInvalides() {
+		assertThrows(IllegalArgumentException.class,
+					 () -> new Polynome(null, new int[] {1}, 2),
+					 "Tableau de racines null accepté"); 								//tableau de racines null
+		assertThrows(IllegalArgumentException.class,
+					 () -> new Polynome(new double[] {Double.NaN}, new int[] {1}, 2),
+					 "Racine NaN acceptée");											//tableau de racines contenant uniquement un NaN
+		assertThrows(IllegalArgumentException.class,
+					 () -> new Polynome(new double[] {Double.POSITIVE_INFINITY},
+							 			new int[] {1}, 2),
+					 "Racine +infini acceptée");										//tableau de racines contenant +infini
+		assertThrows(IllegalArgumentException.class,
+				 	 () -> new Polynome(new double[] {Double.NEGATIVE_INFINITY},
+						 			new int[] {1}, 2),
+				 	 "Racine +infini acceptée");										//tableau de racines contenant -infini
+		assertThrows(IllegalArgumentException.class,
+					 () -> new Polynome(new double[] {3, Double.NaN},
+							 			new int[] {1, 1}, 2),
+					 "Racine NaN acceptée");											//tableau de racines contenant un NaN
+		assertThrows(IllegalArgumentException.class,
+					 () -> new Polynome(new double[] {1}, null, 2),
+					 "Ordre de multiplicité null accepté");								//tableau d'ordre de multiplicité null
+		assertThrows(IllegalArgumentException.class,
+				 	 () -> new Polynome(new double[] {1}, new int[] {0}, 2),
+				 	 "Ordre de multiplicité unique nul accepté");						//tableau d'ordre de multiplicité contenant uniquement un 0
+		assertThrows(IllegalArgumentException.class,
+				 	 () -> new Polynome(new double[] {1}, new int[] {-1}, 2),
+				 	 "Ordre de multiplicité unique négatif accepté");					//tableau d'ordre de multiplicité contenant uniquement une valeur négative
+		assertThrows(IllegalArgumentException.class,
+				 	 () -> new Polynome(new double[] {1, 2}, new int[] {1,0}, 2),
+				 	 "Ordre de multiplicité nul accepté");								//tableau d'ordre de multiplicité contenant un 0
+		assertThrows(IllegalArgumentException.class,
+				 	 () -> new Polynome(new double[] {1, 2}, new int[] {1, -2}, 2),
+				 	 "Ordre de multiplicité négatif accepté");							//tableau d'ordre de multiplicité contenant une valeur négative
+		assertThrows(IllegalArgumentException.class,
+				 	 () -> new Polynome(new double[] {1, 2, 3}, new int[] {1, 1}, 2),
+				 	 "Nombre de racines et d'ordres de multiplicités différent accepté");	//tableaux de racines et d'ordre de multiplicité de longueur différente
+		assertThrows(IllegalArgumentException.class,
+				 	 () -> new Polynome(new double[] {1}, new int[] {1, 1}, 2),
+				 	 "Nombre de racines et d'ordres de multiplicités différent accepté");
+		assertThrows(IllegalArgumentException.class,
+				 	 () -> new Polynome(new double[] {1}, new int[] {1}, 0),
+				 	 "Coefficient nul du plus haut monôme accepté");					//Coefficient du plus haut monôme nul
+		assertThrows(IllegalArgumentException.class,
+				 	 () -> new Polynome(new double[] {1}, new int[] {1}, Double.NaN),
+				 	 "Coefficient NaN du plus haut monôme accepté");					//Coefficient du plus haut monôme NaN
+		assertThrows(IllegalArgumentException.class,
+			 	 	 () -> new Polynome(new double[] {1}, new int[] {1}, Double.POSITIVE_INFINITY),
+			 	 	 "Coefficient +infini du plus haut monôme accepté");					//Coefficient du plus haut monôme +infini
+		assertThrows(IllegalArgumentException.class,
+		 	 	 	 () -> new Polynome(new double[] {1}, new int[] {1}, Double.NEGATIVE_INFINITY),
+		 	 	 	 "Coefficient -infini du plus haut monôme accepté");					//Coefficient du plus haut monôme -infini
 	}
 
 }
