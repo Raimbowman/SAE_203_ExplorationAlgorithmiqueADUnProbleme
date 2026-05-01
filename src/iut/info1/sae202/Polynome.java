@@ -161,6 +161,11 @@ public class Polynome {
 	 * @return coefficients du polynôme
 	 */
 	public double[] getCoefficients() {
+		if (numeroConstructeur == 1) {
+			return coefficients;
+		} else {
+			//TODO compléter la fonction pour résoudre les tests en échec
+		}
 		return new double[] {0}; //STUB
 	}
 	
