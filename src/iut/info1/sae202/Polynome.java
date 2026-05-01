@@ -165,10 +165,42 @@ public class Polynome {
 	}
 	
 	/**
-	 * @return limites du polynôme en -infini et +infini
+	 * @return limites du polynôme en -infini et +infini (dans cet ordre)
 	 */
 	public double[] getLimites() {
-		return new double[] {0}; //STUB
+		if (numeroConstructeur == 1) {
+			if ((coefficients.length - 1) % 2 == 0) {
+				if (coefficients[coefficients.length - 1] > 0) {
+					return new double[] {Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY};
+				} else {
+					return new double[] {Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY};
+				}
+			} else {
+				if (coefficients[coefficients.length - 1] > 0) {
+					return new double[] {Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY};
+				} else {
+					return new double[] {Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY};
+				}
+			}
+		} else {
+			int degre = 0;
+			for (int indice = 0; indice < ordresMultiplicite.length; indice++) {
+				degre += ordresMultiplicite[indice];
+			}
+			if (degre % 2 == 0) {
+				if (plusHautCoefficient > 0) {
+					return new double[] {Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY};
+				} else {
+					return new double[] {Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY};
+				}
+			} else {
+				if (plusHautCoefficient > 0) {
+					return new double[] {Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY};
+				} else {
+					return new double[] {Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY};
+				}
+			}
+		}
 	}
 	
 	/**

@@ -122,5 +122,44 @@ class PolynomeTest {
 									 new int[] {2, 1}, 8).getDegre(),
 				 "Echec des racines sur un degré 3");						//Constructeur racines degré 3
 	}
-
+	
+	@Test
+	void testGetLimites() {
+		assertArrayEquals(new double[] {Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY},
+					 	  new Polynome(new double[] {2, -1, 3}).getLimites(),
+					 	  "Echec des coefficients sur un coef positif de degré pair");
+		assertArrayEquals(new double[] {Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY},
+				 		  new Polynome(new double[] {2, -1, -3}).getLimites(),
+				 		  "Echec des coefficients sur un coef négatif de degré pair");
+		assertArrayEquals(new double[] {Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY},
+						  new Polynome(new double[] {2, -1, 3, 6}).getLimites(),
+				 		  "Echec des coefficients sur un coef positif de degré impair");
+		assertArrayEquals(new double[] {Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY},
+				 		  new Polynome(new double[] {2, -1, 3, -6}).getLimites(),
+				 		  "Echec des coefficients sur un coef négatif de degré impair");
+		assertArrayEquals(new double[] {Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY},
+				 		  new Polynome(new double[] {2, 3}, new int[] {1, 1}, 2).getLimites(),
+				 		  "Echec des racines sur un coef positif de degré pair");
+		assertArrayEquals(new double[] {Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY},
+				 	 	  new Polynome(new double[] {2, 3}, new int[] {1, 1}, -2).getLimites(),
+				 		  "Echec des racines sur un coef négatif de degré pair");
+		assertArrayEquals(new double[] {Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY},
+				 		  new Polynome(new double[] {2, 3}, new int[] {1, 2}, 2).getLimites(),
+				 		  "Echec des racines sur un coef positif de degré impair");
+		assertArrayEquals(new double[] {Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY},
+				 		  new Polynome(new double[] {2, 3}, new int[] {2, 1}, -2).getLimites(),
+				 		  "Echec des racines sur un coef négatif de degré impair");
+		assertArrayEquals(new double[] {Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY},
+						  new Polynome(new double[] {3}).getLimites(),
+						  "Echec des coefficients sur une constante positive");
+		assertArrayEquals(new double[] {Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY},
+						  new Polynome(new double[] {-3}).getLimites(),
+						  "Echec des coefficients sur une constante négative");
+		assertArrayEquals(new double[] {Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY},
+						  new Polynome(new double[] {}, new int[] {}, 2).getLimites(),
+						  "Echec des racines sur une constante positive");
+		assertArrayEquals(new double[] {Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY},
+						  new Polynome(new double[] {}, new int[] {}, -3).getLimites(),
+						  "Echec des racines sur une constante négative");
+	}
 }
