@@ -164,7 +164,7 @@ public class Polynome {
 		if (numeroConstructeur == 1) {
 			return coefficients;
 		} else {
-			//TODO compléter la fonction pour résoudre les tests en échec
+			//TODO compléter la fonction pour résoudre les tests en échec du constructeur 2
 		}
 		return new double[] {0}; //STUB
 	}
@@ -213,5 +213,6 @@ public class Polynome {
 	 */
 	public double[] getRacines() {
 		return new double[] {0}; //STUB
+		//TODO écrire la fonction (uniquement pour le constructeur 2
 	}
 }
