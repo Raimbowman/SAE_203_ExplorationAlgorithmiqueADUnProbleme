@@ -222,7 +222,7 @@ public class Polynome {
 	 * @return un tableau de coefficients qui correspondent aux coefficients du polynome résultat
 	 */
 	public double[] multiplication(double reel) {
-		return double[] {0}; //STUB
+		return new double[] {0}; //STUB
 	}
 	
 	/**
