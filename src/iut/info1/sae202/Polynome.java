@@ -222,15 +222,7 @@ public class Polynome {
 	 * @return un tableau de coefficients qui correspondent aux coefficients du polynome résultat
 	 */
 	public double[] multiplication(double reel) {
-		double[] produit = coefficients;
-		if (numeroConstructeur == 1) {
-			for (int indice = 0; indice < coefficients.length; indice++) {
-				produit[indice] = produit[indice] * reel;
-			}
-		} else {
-			return new double[] {0}; //STUB
-		}
-		return produit;
+		return double[] {0}; //STUB
 	}
 	
 	/**
