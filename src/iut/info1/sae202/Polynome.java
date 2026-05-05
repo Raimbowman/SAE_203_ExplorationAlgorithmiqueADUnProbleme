@@ -212,7 +212,9 @@ public class Polynome {
 	 * @return racines réelles du polynôme (si elles existent)
 	 */
 	public double[] getRacines() {
+		if (numeroConstructeur == 2) {
+			return racines;
+		}
 		return new double[] {0}; //STUB
-		//TODO écrire la fonction (uniquement pour le constructeur 2)
 	}
 }

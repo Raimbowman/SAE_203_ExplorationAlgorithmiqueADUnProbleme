@@ -142,23 +142,23 @@ class PolynomeTest {
 						  new Polynome(new double[] {0, 0, -1}).getCoefficients(),
 						  "Echec des coefficients sur un polynôme de degré 2 sans autre coefficient");
 		assertArrayEquals(new double[] {-2, 1},
-				  new Polynome(new double[] {2}, new int[] {1}, 1).getCoefficients(),
-				  1e-9,
-				  "Echec des racines sur un polynôme de degré 1");
+						  new Polynome(new double[] {2}, new int[] {1}, 1).getCoefficients(),
+						  1e-9,
+						  "Echec des racines sur un polynôme de degré 1");
 		assertArrayEquals(new double[] {4, -4, 1},
-				  new Polynome(new double[] {2}, new int[] {2}, 1).getCoefficients(),
-				  1e-9,
-				  "Echec des racines sur un polynôme de degré 2 avec une racine double");
+						  new Polynome(new double[] {2}, new int[] {2}, 1).getCoefficients(),
+						  1e-9,
+						  "Echec des racines sur un polynôme de degré 2 avec une racine double");
 		assertArrayEquals(new double[] {3, -4, 1},
-				  new Polynome(new double[] {1, 3}, new int[] {1, 1}, 1).getCoefficients(),
-				  1e-9,
-				  "Echec des racines sur un polynôme de degré 2 avec"
-				  + "deux racines simples et un coefficient = 1");
+						  new Polynome(new double[] {1, 3}, new int[] {1, 1}, 1).getCoefficients(),
+						  1e-9,
+						  "Echec des racines sur un polynôme de degré 2 avec"
+						  + "deux racines simples et un coefficient = 1");
 		assertArrayEquals(new double[] {6, -8, 2},
-				  new Polynome(new double[] {1, 3}, new int[] {1, 1}, 2).getCoefficients(),
-				  1e-9,
-				  "Echec des racines sur un polynôme de degré 2 avec"
-				  + "deux racines simples et un coefficient = 2");
+						  new Polynome(new double[] {1, 3}, new int[] {1, 1}, 2).getCoefficients(),
+						  1e-9,
+						  "Echec des racines sur un polynôme de degré 2 avec"
+						  + "deux racines simples et un coefficient = 2");
 	}
 	
 	@Test
@@ -199,5 +199,16 @@ class PolynomeTest {
 		assertArrayEquals(new double[] {Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY},
 						  new Polynome(new double[] {}, new int[] {}, -3).getLimites(),
 						  "Echec des racines sur une constante négative");
+	}
+	
+	@Test
+	void testGetRacines() {
+		assertArrayEquals(new double[] {2},
+				          new Polynome(new double[] {2}, new int[] {5}, 1).getRacines(),
+						  "Echec des racines sur une unique constante double");
+		assertArrayEquals(new double[] {},
+						  new Polynome(new double[] {}, new int[] {}, 1).getRacines(),
+						  "Echec");
+		
 	}
 }
