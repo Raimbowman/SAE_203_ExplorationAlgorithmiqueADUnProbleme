@@ -213,6 +213,6 @@ public class Polynome {
 	 */
 	public double[] getRacines() {
 		return new double[] {0}; //STUB
-		//TODO écrire la fonction (uniquement pour le constructeur 2
+		//TODO écrire la fonction (uniquement pour le constructeur 2)
 	}
 }
