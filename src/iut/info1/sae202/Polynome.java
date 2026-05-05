@@ -216,17 +216,29 @@ public class Polynome {
 		//TODO écrire la fonction (uniquement pour le constructeur 2)
 	}
 	
+	/**
+	 * Multiplie le polynome par un réel
+	 * @param reel nombre par lequel multiplier le polynome
+	 * @return un tableau de coefficients qui correspondent aux coefficients du polynome résultat
+	 */
 	public double[] multiplication(double reel) {
 		double[] produit = coefficients;
 		if (numeroConstructeur == 1) {
 			for (int indice = 0; indice < coefficients.length; indice++) {
 				produit[indice] = produit[indice] * reel;
 			}
+		} else {
+			return new double[] {0}; //STUB
 		}
 		return produit;
 	}
 	
-	public double[] multiplication(double[] secondPolynome) {
+	/**
+	 * Multiplie le polynome par un un autre polynome
+	 * @param secondPolynome polynome par lequel multiplier le premier polynome
+	 * @return un tableau de coefficients qui correspondent aux coefficients du polynome résultat
+	 */
+	public double[] multiplication(Polynome secondPolynome) {
 		return new double[] {0}; //STUB
 	}
 }

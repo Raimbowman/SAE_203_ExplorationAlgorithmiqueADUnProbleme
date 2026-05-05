@@ -208,17 +208,58 @@ class PolynomeTest {
 						  new Polynome(new double[] {5}).multiplication(2),
 						  "Echec des coefficients sur un polynôme de degré 0 "
 						  + "multiplié par un réel entier positif");
-		assertArrayEquals(new double[] {35},
-						  new Polynome(new double[] {10}).multiplication(3.5),
+		assertArrayEquals(new double[] {-14},
+						  new Polynome(new double[] {-4}).multiplication(3.5),
 						  "Echec des coefficients sur un polynôme de degré 0 "
 						  + "multiplié par un réel décimal positif");
-		assertArrayEquals(new double[] {-4, -8, -10},
-						  new Polynome(new double[] {2, 4, 5}).multiplication(-2),
-						  "Echec des coefficients sur un polynôme de degré 2 "
+		assertArrayEquals(new double[] {-4, -8, -10, -12, -4},
+						  new Polynome(new double[] {2, 4, 5, 6, 2}).multiplication(-2),
+						  "Echec des coefficients sur un polynôme de degré 4 "
 						  + "multiplié par un réel entier négatif");
 		assertArrayEquals(new double[] {-7, -14, -17.5},
 						  new Polynome(new double[] {2, 4, 5}).multiplication(-3.5),
 						  "Echec des coefficients sur un polynôme de degré 2 "
+						  + "multiplié par un réel décimal négatif");
+		assertArrayEquals(new double[] {-24},
+						  new Polynome(new double[] {6}).multiplication(-4),
+						  "Echec des coefficients sur un polynôme de degré 0 "
+						  + "multiplié par un réel entier négatif");
+		assertArrayEquals(new double[] {10.5},
+						  new Polynome(new double[] {-3}).multiplication(-3.5),
+						  "Echec des coefficients sur un polynôme de degré 0 "
+						  + "multiplié par un réel décimal négatif");
+		
+		assertArrayEquals(new double[] {48, -40, 8},
+						  new Polynome(new double[] {2, 3}, new int[] {1, 1}, 2).multiplication(4),
+						  "Echec des racines sur un polynôme de degré 2 "
+						  + "multiplié par un réel entier positif");
+		assertArrayEquals(new double[] {90, -52.5, 7.5},
+						  new Polynome(new double[] {4, 3}, new int[] {1, 1}, 3).multiplication(2.5),
+						  "Echec des coefficients sur un polynôme de degré 2 "
+						  + "multiplié par un réel décimal positif");
+		assertArrayEquals(new double[] {6},
+						  new Polynome(new double[] {}, new int[] {}, 3).multiplication(2),
+						  "Echec des coefficients sur un polynôme de degré 0 "
+						  + "multiplié par un réel entier positif");
+		assertArrayEquals(new double[] {-17.5},
+						  new Polynome(new double[] {}, new int[] {}, -5).multiplication(3.5),
+						  "Echec des coefficients sur un polynôme de degré 0 "
+						  + "multiplié par un réel décimal positif");
+		assertArrayEquals(new double[] {80, -20, -10},
+						  new Polynome(new double[] {2, -4}, new int[] {1, 1}, 5).multiplication(-2),
+						  "Echec des coefficients sur un polynôme de degré 2 "
+						  + "multiplié par un réel entier négatif");
+		assertArrayEquals(new double[] {-42, -49, 21, 21, -7},
+						  new Polynome(new double[] {-1, 2, 3}, new int[] {2, 1, 1}, 2).multiplication(-3.5),
+						  "Echec des coefficients sur un polynôme de degré 4 "
+						  + "multiplié par un réel décimal négatif");
+		assertArrayEquals(new double[] {-24},
+						  new Polynome(new double[] {}, new int[] {}, 6).multiplication(-4),
+						  "Echec des coefficients sur un polynôme de degré 0 "
+						  + "multiplié par un réel entier négatif");
+		assertArrayEquals(new double[] {-14},
+						  new Polynome(new double[] {}, new int[] {}, 4).multiplication(-3.5),
+						  "Echec des coefficients sur un polynôme de degré 0 "
 						  + "multiplié par un réel décimal négatif");
 	}
 }
