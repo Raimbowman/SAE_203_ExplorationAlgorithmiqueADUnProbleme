@@ -217,4 +217,22 @@ public class Polynome {
 		}
 		return new double[] {0}; //STUB
 	}
+	
+	/**
+	 * Multiplie le polynome par un réel
+	 * @param reel nombre par lequel multiplier le polynome
+	 * @return un tableau de coefficients qui correspondent aux coefficients du polynome résultat
+	 */
+	public double[] multiplication(double reel) {
+		return new double[] {0}; //STUB
+	}
+	
+	/**
+	 * Multiplie le polynome par un un autre polynome
+	 * @param secondPolynome polynome par lequel multiplier le premier polynome
+	 * @return un tableau de coefficients qui correspondent aux coefficients du polynome résultat
+	 */
+	public double[] multiplication(Polynome secondPolynome) {
+		return new double[] {0}; //STUB
+	}
 }
