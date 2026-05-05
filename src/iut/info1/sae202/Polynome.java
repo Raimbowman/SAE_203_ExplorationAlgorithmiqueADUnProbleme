@@ -215,4 +215,18 @@ public class Polynome {
 		return new double[] {0}; //STUB
 		//TODO écrire la fonction (uniquement pour le constructeur 2)
 	}
+	
+	public double[] multiplication(double reel) {
+		double[] produit = coefficients;
+		if (numeroConstructeur == 1) {
+			for (int indice = 0; indice < coefficients.length; indice++) {
+				produit[indice] = produit[indice] * reel;
+			}
+		}
+		return produit;
+	}
+	
+	public double[] multiplication(double[] secondPolynome) {
+		return new double[] {0}; //STUB
+	}
 }

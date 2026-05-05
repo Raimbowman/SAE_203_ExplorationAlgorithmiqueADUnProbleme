@@ -193,4 +193,32 @@ class PolynomeTest {
 						  new Polynome(new double[] {}, new int[] {}, -3).getLimites(),
 						  "Echec des racines sur une constante négative");
 	}
+	
+	@Test
+	void testMultiplication() {
+		assertArrayEquals(new double[] {6, 12, 15},
+						  new Polynome(new double[] {2, 4, 5}).multiplication(3),
+						  "Echec des coefficients sur un polynôme de degré 2 "
+						  + "multiplié par un réel entier positif");
+		assertArrayEquals(new double[] {10, 20, 25},
+						  new Polynome(new double[] {4, 8, 10}).multiplication(2.5),
+						  "Echec des coefficients sur un polynôme de degré 2 "
+						  + "multiplié par un réel décimal positif");
+		assertArrayEquals(new double[] {10},
+						  new Polynome(new double[] {5}).multiplication(2),
+						  "Echec des coefficients sur un polynôme de degré 0 "
+						  + "multiplié par un réel entier positif");
+		assertArrayEquals(new double[] {35},
+						  new Polynome(new double[] {10}).multiplication(3.5),
+						  "Echec des coefficients sur un polynôme de degré 0 "
+						  + "multiplié par un réel décimal positif");
+		assertArrayEquals(new double[] {-4, -8, -10},
+						  new Polynome(new double[] {2, 4, 5}).multiplication(-2),
+						  "Echec des coefficients sur un polynôme de degré 2 "
+						  + "multiplié par un réel entier négatif");
+		assertArrayEquals(new double[] {-7, -14, -17.5},
+						  new Polynome(new double[] {2, 4, 5}).multiplication(-3.5),
+						  "Echec des coefficients sur un polynôme de degré 2 "
+						  + "multiplié par un réel décimal négatif");
+	}
 }
