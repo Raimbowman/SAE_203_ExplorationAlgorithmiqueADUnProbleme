@@ -9,11 +9,18 @@ class PolynomeTest {
 
 	@Test
 	void testPolynomeCoefficientsValides() {
-		assertDoesNotThrow(() -> new Polynome(new double[] {-2, 4, 3})); 		   //polynome classique
+		assertDoesNotThrow(() -> new Polynome(new double[] {-2, 4, 3})); 		   //polynome classique (3 coefficients)
 		assertDoesNotThrow(() -> new Polynome(new double[] {5}));        		   //constante
+		assertDoesNotThrow(() -> new Polynome(new double[] {-8}));        		   //constante négative
 		assertDoesNotThrow(() -> new Polynome(new double[] {0, 0, 1}));  		   //x^2
 		assertDoesNotThrow(() -> new Polynome(new double[] {12.5, -7.345, 65.8})); //valeurs décimales
 		assertDoesNotThrow(() -> new Polynome(new double[] {0})); 				   //cas particulier polynome nul
+		assertDoesNotThrow(() -> new Polynome(new double[] {5, -3, 8, 12, -9, 7, 
+				                                            6, 10, 54, -21}));     //polynome classique (10 coefficients)
+		assertDoesNotThrow(() -> new Polynome(new double[] {-1, 0, 6.24, -8, 4.3, 
+				                                            14.9, -7.21, 13, 0, 
+				                                            -2.5, 11, -3.9, 10, 17, 
+				                                            1.7}));                //polynome avec valeurs décimales (15 coefficients)
 	}
 	
 	@Test
