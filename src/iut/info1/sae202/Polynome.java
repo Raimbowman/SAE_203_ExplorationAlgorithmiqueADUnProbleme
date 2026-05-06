@@ -152,15 +152,7 @@ public class Polynome {
 	 * @return degré du polynome (degré du monôme de plus haut degré)
 	 */
 	public double getDegre() {
-		if (numeroConstructeur == 1) {
-			return coefficients.length - 1;
-		} else {
-			double degre = 0;
-			for (int ordre : ordresMultiplicite) {
-				degre += ordre;
-			}
-			return degre;
-		}
+		return coefficients.length - 1;
 	}
 	
 	/**
@@ -189,37 +181,17 @@ public class Polynome {
 	 * @return limites du polynôme en -infini et +infini (dans cet ordre)
 	 */
 	public double[] getLimites() {
-		if (numeroConstructeur == 1) {
-			if ((coefficients.length - 1) % 2 == 0) {
-				if (coefficients[coefficients.length - 1] > 0) {
-					return new double[] {Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY};
-				} else {
-					return new double[] {Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY};
-				}
+		if ((coefficients.length - 1) % 2 == 0) {
+			if (coefficients[coefficients.length - 1] > 0) {
+				return new double[] {Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY};
 			} else {
-				if (coefficients[coefficients.length - 1] > 0) {
-					return new double[] {Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY};
-				} else {
-					return new double[] {Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY};
-				}
+				return new double[] {Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY};
 			}
 		} else {
-			int degre = 0;
-			for (int indice = 0; indice < ordresMultiplicite.length; indice++) {
-				degre += ordresMultiplicite[indice];
-			}
-			if (degre % 2 == 0) {
-				if (plusHautCoefficient > 0) {
-					return new double[] {Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY};
-				} else {
-					return new double[] {Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY};
-				}
+			if (coefficients[coefficients.length - 1] > 0) {
+				return new double[] {Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY};
 			} else {
-				if (plusHautCoefficient > 0) {
-					return new double[] {Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY};
-				} else {
-					return new double[] {Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY};
-				}
+				return new double[] {Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY};
 			}
 		}
 	}

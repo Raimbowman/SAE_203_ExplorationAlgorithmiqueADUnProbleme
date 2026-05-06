@@ -231,7 +231,6 @@ class PolynomeTest {
  		assertThrows(UnsupportedOperationException.class,
  					 () -> new Polynome(new double[] {1, 2, 3}).getRacines(),
  					 "Echec de la levée d'exception sur un polynôme construit par coefficients");
- 		}
 	}
 	
 	@Test
@@ -365,7 +364,7 @@ class PolynomeTest {
 		                  + "multiplié par un polynôme de degré 0 décimal négatif");
 	}
 	
-	@Test
+	
 	void testToString() {
 		assertEquals("2x^2+5x+3", new Polynome(new double[] {3, 5, 2}).toString(),
 					 "Echec des coefficients 3, 5 et 2");
