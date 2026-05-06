@@ -224,7 +224,7 @@ public class Polynome {
 	 * @return un tableau de coefficients qui correspondent aux coefficients du polynome résultat
 	 */
 	public double[] multiplication(double reel) {
-		return new double[] {0}; //STUB
+		return multiplication(new Polynome(new double[] {reel}));
 	}
 	
 	/**
@@ -233,6 +233,12 @@ public class Polynome {
 	 * @return un tableau de coefficients qui correspondent aux coefficients du polynome résultat
 	 */
 	public double[] multiplication(Polynome secondPolynome) {
-		return new double[] {0}; //STUB
+		double[] produit = new double[(coefficients.length - 1) + (secondPolynome.coefficients.length - 1)];
+		for (int indiceTab1 = 0; indiceTab1 < coefficients.length; indiceTab1++) {
+			for (int indiceTab2 = 0; indiceTab2 < secondPolynome.coefficients.length; indiceTab2++) {
+				produit[indiceTab1 + indiceTab2] += coefficients[indiceTab1] * secondPolynome.coefficients[indiceTab2];
+			}
+		}
+		return produit;
 	}
 }
