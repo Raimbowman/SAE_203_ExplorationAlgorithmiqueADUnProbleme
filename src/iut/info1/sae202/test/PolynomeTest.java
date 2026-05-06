@@ -202,7 +202,6 @@ class PolynomeTest {
 	}
 	
 	@Test
-<<<<<<< HEAD
 	void testGetRacines() {
 		assertArrayEquals(new double[] {2},
 				          new Polynome(new double[] {2}, new int[] {5}, 1).getRacines(),
@@ -210,8 +209,8 @@ class PolynomeTest {
 		assertArrayEquals(new double[] {},
 						  new Polynome(new double[] {}, new int[] {}, 1).getRacines(),
 						  "Echec");
-		
-=======
+	}
+	
 	void testMultiplication() {
 		assertArrayEquals(new double[] {6, 12, 15},
 						  new Polynome(new double[] {2, 4, 5}).multiplication(3),
@@ -340,6 +339,5 @@ class PolynomeTest {
 		                  new Polynome(new double[] {-1, 2, 3}, new int[] {2, 1, 1}, 2).multiplication(new Polynome(new double[] {-3.5})),
 		                  "Echec des coefficients sur un polynôme de degré 4 construit par racines "
 		                  + "multiplié par un polynôme de degré 0 décimal négatif");
->>>>>>> branch 'dev' of https://github.com/Raimbowman/SAE_202_ExplorationAlgorithmiqueADUnProbleme
 	}
 }
