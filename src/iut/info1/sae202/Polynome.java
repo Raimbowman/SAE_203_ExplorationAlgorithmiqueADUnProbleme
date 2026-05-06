@@ -145,11 +145,11 @@ public class Polynome {
 	/**
 	 * @return degré du polynome (degré du monôme de plus haut degré)
 	 */
-	public int getDegre() {
+	public double getDegre() {
 		if (numeroConstructeur == 1) {
 			return coefficients.length - 1;
 		} else {
-			int degre = 0;
+			double degre = 0;
 			for (int ordre : ordresMultiplicite) {
 				degre += ordre;
 			}
