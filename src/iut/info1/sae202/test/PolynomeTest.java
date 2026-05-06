@@ -203,12 +203,35 @@ class PolynomeTest {
 	
 	@Test
 	void testGetRacines() {
-		assertArrayEquals(new double[] {2},
-				          new Polynome(new double[] {2}, new int[] {5}, 1).getRacines(),
-						  "Echec des racines sur une unique constante double");
-		assertArrayEquals(new double[] {},
-						  new Polynome(new double[] {}, new int[] {}, 1).getRacines(),
-						  "Echec");
+	    assertArrayEquals(new double[] {2},
+	                      new Polynome(new double[] {2}, new int[] {5}, 1).getRacines(),
+	                      "Echec des racines sur un polynôme avec une unique racine de multiplicité 5");
+	    assertArrayEquals(new double[] {},
+	                      new Polynome(new double[] {}, new int[] {}, 5).getRacines(),
+	                      "Echec sur un polynôme sans racines");
+ 		assertArrayEquals(new double[] {3.5},
+ 						  new Polynome(new double[] {3.5}, new int[] {2}, 1).getRacines(),
+ 						  "Echec des racines sur un polynôme avec une unique racine double");
+ 		assertArrayEquals(new double[] {-1, 4.2},
+ 						  new Polynome(new double[] {-1, 4.2}, new int[] {1, 1}, 2).getRacines(),
+ 						  "Echec des racines sur un polynôme avec deux racines simples");
+ 		assertArrayEquals(new double[] {-2, -1, 0, 1, 2},
+ 						  new Polynome(new double[] {-2, -1, 0, 1, 2}, 
+ 									   new int[] {1, 1, 1, 1, 1}, 1).getRacines(),
+ 						  "Echec des racines sur un polynôme avec cinq racines simples");
+ 		assertArrayEquals(new double[] {2.3, -3, 1, -1, 4.2},
+						  new Polynome(new double[] {2.3, -3, 1, -1, 4.2}, 
+									   new int[] {1, 1, 1, 2, 2}, 4).getRacines(),
+						  "Echec des racines sur un polynôme avec cinq racines simples et doubles");
+		assertArrayEquals(new double[] {-2, -1, 0, 1, 2},
+						  new Polynome(new double[] {-2, -1, 0, 1, 2}, 
+									   new int[] {3, 3, 3, 3, 3}, 1).getRacines(),
+						  "Echec des racines sur un polynôme avec cinq racines triples");
+ 
+ 		assertThrows(UnsupportedOperationException.class,
+ 					 () -> new Polynome(new double[] {1, 2, 3}).getRacines(),
+ 					 "Echec de la levée d'exception sur un polynôme construit par coefficients");
+ 		}
 	}
 	
 	void testMultiplication() {
