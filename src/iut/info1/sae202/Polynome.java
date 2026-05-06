@@ -18,6 +18,10 @@ public class Polynome {
 						 = "Tableaux de racines, d'ordre de multiplicité "
 						   + "ou de coefficient du plus haut monôme invalides";
 	
+	private final String MESSAGE_ERREUR_GET_RACINES
+						 = "Racines disponibles pour un polynome construit "
+						   + "à partir de ses racines";
+	
 	/**
 	 * différents coefficients du polynôme construit avec le constructeur
 	 * prenant en paramètres un tableau des coefficients
@@ -224,8 +228,9 @@ public class Polynome {
 	public double[] getRacines() {
 		if (numeroConstructeur == 2) {
 			return racines;
+		} else {
+			throw new UnsupportedOperationException(MESSAGE_ERREUR_GET_RACINES);
 		}
-		return new double[] {0}; //STUB
 	}
 	
 	/**
