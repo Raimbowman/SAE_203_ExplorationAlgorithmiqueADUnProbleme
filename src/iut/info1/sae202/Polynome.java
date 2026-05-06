@@ -145,7 +145,7 @@ public class Polynome {
 	/**
 	 * @return degré du polynome (degré du monôme de plus haut degré)
 	 */
-	public double getDegre() {
+	public int getDegre() {
 		if (numeroConstructeur == 1) {
 			return coefficients.length - 1;
 		} else {
@@ -165,8 +165,18 @@ public class Polynome {
 			return coefficients;
 		} else {
 			//TODO compléter la fonction pour résoudre les tests en échec du constructeur 2
+			double[] resultat = new double[] {1};
+			for (int indiceRacines = 0; indiceRacines < racines.length; indiceRacines++) {
+				for (int valeurOrdreMultiplicite = 0;
+					 valeurOrdreMultiplicite < ordresMultiplicite[indiceRacines];
+					 valeurOrdreMultiplicite++) {
+					Polynome temp = new Polynome(resultat);
+					double[] facteur = new double[] {-racines[indiceRacines], 1};
+					resultat = temp.multiplication(new Polynome(facteur));
+				}
+			}
+			return (new Polynome(resultat).multiplication(plusHautCoefficient));
 		}
-		return new double[] {0}; //STUB
 	}
 	
 	/**
@@ -233,7 +243,7 @@ public class Polynome {
 	 * @return un tableau de coefficients qui correspondent aux coefficients du polynome résultat
 	 */
 	public double[] multiplication(Polynome secondPolynome) {
-		double[] produit = new double[(coefficients.length - 1) + (secondPolynome.coefficients.length - 1)];
+		double[] produit = new double[(coefficients.length - 1) + (secondPolynome.coefficients.length - 1) + 1];
 		for (int indiceTab1 = 0; indiceTab1 < coefficients.length; indiceTab1++) {
 			for (int indiceTab2 = 0; indiceTab2 < secondPolynome.coefficients.length; indiceTab2++) {
 				produit[indiceTab1 + indiceTab2] += coefficients[indiceTab1] * secondPolynome.coefficients[indiceTab2];
