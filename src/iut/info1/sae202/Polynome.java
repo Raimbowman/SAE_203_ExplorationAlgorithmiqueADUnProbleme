@@ -79,6 +79,7 @@ public class Polynome {
 		
 		coefficients = tabCoefficients;
 		numeroConstructeur = 1;
+		plusHautCoefficient = tabCoefficients[tabCoefficients.length - 1];
 	}
 	
 	/**
@@ -107,6 +108,7 @@ public class Polynome {
 		ordresMultiplicite = tabOrdreMultiplicite;
 		plusHautCoefficient = hautCoefficient;
 		numeroConstructeur = 2;
+		coefficients = this.getCoefficients();
 	}
 	
 	/**
@@ -149,11 +151,11 @@ public class Polynome {
 	/**
 	 * @return degré du polynome (degré du monôme de plus haut degré)
 	 */
-	public int getDegre() {
+	public double getDegre() {
 		if (numeroConstructeur == 1) {
 			return coefficients.length - 1;
 		} else {
-			int degre = 0;
+			double degre = 0;
 			for (int ordre : ordresMultiplicite) {
 				degre += ordre;
 			}
@@ -176,10 +178,10 @@ public class Polynome {
 					 valeurOrdreMultiplicite++) {
 					Polynome temp = new Polynome(resultat);
 					double[] facteur = new double[] {-racines[indiceRacines], 1};
-					resultat = temp.multiplication(new Polynome(facteur)).getCoefficients();
+					resultat = temp.multiplication(new Polynome(facteur)).coefficients;
 				}
 			}
-			return (new Polynome(resultat).multiplication(plusHautCoefficient).getCoefficients());
+			return (new Polynome(resultat).multiplication(plusHautCoefficient).coefficients);
 		}
 	}
 	
@@ -233,6 +235,16 @@ public class Polynome {
 		}
 	}
 	
+	@Override
+	/**
+	 * Trnasforme le polynome en chaine de caractère plus
+	 * facilement lisible par un utilisateur
+	 * @return chaine de caractère de la forme : 2x^2+3x-4
+	 */
+	public String toString() {
+		return ""; //STUB
+	}
+	
 	/**
 	 * Multiplie le polynome par un réel
 	 * @param reel nombre par lequel multiplier le polynome
@@ -248,13 +260,14 @@ public class Polynome {
 	 * @return un tableau de coefficients qui correspondent aux coefficients du polynome résultat
 	 */
 	public Polynome multiplication(Polynome secondPolynome) {
+		
 		double[] produit = new double[(coefficients.length - 1) + (secondPolynome.coefficients.length - 1) + 1];
 		for (int indiceTab1 = 0; indiceTab1 < coefficients.length; indiceTab1++) {
 			for (int indiceTab2 = 0; indiceTab2 < secondPolynome.coefficients.length; indiceTab2++) {
 				produit[indiceTab1 + indiceTab2] += coefficients[indiceTab1] * secondPolynome.coefficients[indiceTab2];
 			}
 		}
-		Polynome polynomeResultat = new Polynome(produit); 
+		Polynome polynomeResultat = new Polynome(produit);
 		return polynomeResultat;
 	}
 }
