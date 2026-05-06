@@ -172,10 +172,10 @@ public class Polynome {
 					 valeurOrdreMultiplicite++) {
 					Polynome temp = new Polynome(resultat);
 					double[] facteur = new double[] {-racines[indiceRacines], 1};
-					resultat = temp.multiplication(new Polynome(facteur));
+					resultat = temp.multiplication(new Polynome(facteur)).getCoefficients();
 				}
 			}
-			return (new Polynome(resultat).multiplication(plusHautCoefficient));
+			return (new Polynome(resultat).multiplication(plusHautCoefficient).getCoefficients());
 		}
 	}
 	
@@ -233,7 +233,7 @@ public class Polynome {
 	 * @param reel nombre par lequel multiplier le polynome
 	 * @return un tableau de coefficients qui correspondent aux coefficients du polynome résultat
 	 */
-	public double[] multiplication(double reel) {
+	public Polynome multiplication(double reel) {
 		return multiplication(new Polynome(new double[] {reel}));
 	}
 	
@@ -242,13 +242,14 @@ public class Polynome {
 	 * @param secondPolynome polynome par lequel multiplier le premier polynome
 	 * @return un tableau de coefficients qui correspondent aux coefficients du polynome résultat
 	 */
-	public double[] multiplication(Polynome secondPolynome) {
+	public Polynome multiplication(Polynome secondPolynome) {
 		double[] produit = new double[(coefficients.length - 1) + (secondPolynome.coefficients.length - 1) + 1];
 		for (int indiceTab1 = 0; indiceTab1 < coefficients.length; indiceTab1++) {
 			for (int indiceTab2 = 0; indiceTab2 < secondPolynome.coefficients.length; indiceTab2++) {
 				produit[indiceTab1 + indiceTab2] += coefficients[indiceTab1] * secondPolynome.coefficients[indiceTab2];
 			}
 		}
-		return produit;
+		Polynome polynomeResultat = new Polynome(produit); 
+		return polynomeResultat;
 	}
 }
